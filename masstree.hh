@@ -54,6 +54,7 @@ template <typename P> class tcursor;
 
 template <typename P, typename H> struct scan_iterator_impl;
 struct forward_scan_helper;
+struct reverse_scan_helper;
 
 template <typename P>
 class basic_table {
@@ -82,6 +83,7 @@ class basic_table {
     int rscan(Str firstkey, bool matchfirst, F& scanner, threadinfo& ti) const;
 
     typedef scan_iterator_impl<P, forward_scan_helper> forward_scan_iterator_impl;
+    typedef scan_iterator_impl<P, reverse_scan_helper> reverse_scan_iterator_impl;
 
     template <class T>
     T *find_iterator(Str firstkey, threadinfo &ti) const {
