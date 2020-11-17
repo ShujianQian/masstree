@@ -58,12 +58,15 @@ bool unlocked_tcursor<P>::find_unlocked(threadinfo& ti)
 
 template <typename P>
 inline bool basic_table<P>::get(Str key, value_type &value,
-                                threadinfo& ti) const
+                                threadinfo& ti, uint64_t sid) const
 {
     unlocked_tcursor<P> lp(*this, key);
     bool found = lp.find_unlocked(ti);
     if (found)
         value = lp.value();
+    else
+        if (lp.node()->read_sid < sid)
+            lp.node()->read_sid = sid;
     return found;
 }
 

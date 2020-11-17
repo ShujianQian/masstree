@@ -75,7 +75,7 @@ class basic_table {
     inline node_type* root() const;
     inline node_type* fix_root();
 
-    bool get(Str key, value_type& value, threadinfo& ti) const;
+    bool get(Str key, value_type& value, threadinfo& ti, uint64_t sid = 0) const;
 
     template <typename F>
     int scan(Str firstkey, bool matchfirst, F& scanner, threadinfo& ti) const;
